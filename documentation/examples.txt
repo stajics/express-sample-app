@@ -1,0 +1,13 @@
+POST /login
+body: {
+ "email": "bbb@a.com",
+  "password": "test"
+}
+
+POST /signup
+body: {
+	"email": "bbb@a.com",
+	"password": "test",
+	"firstName": "name",
+	"lastName": "lastname"
+}

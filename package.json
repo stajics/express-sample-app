@@ -1,0 +1,42 @@
+{
+  "name": "love-fest-backend",
+  "version": "1.0.0",
+  "main": "api/server.js",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.16.0",
+    "cors": "^2.8.1",
+    "express": "^4.14.1",
+    "jsonwebtoken": "^7.2.1",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.8.1",
+    "morgan": "^1.7.0",
+    "node-fetch": "^1.6.3",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "validator": "^6.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "nodemon": "^1.11.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb"
+    ],
+    "rules": {
+      "consistent-return": "off",
+      "no-shadow": "off",
+      "no-param-reassign": "off"
+    }
+  },
+  "scripts": {
+    "start": "nodemon api/server.js",
+    "debug": "nodemon --inspect api/server.js"
+  }
+}
