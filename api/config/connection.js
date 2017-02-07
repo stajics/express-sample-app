@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const secrets = require('./secrets');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/love-fest');
+mongoose.connect(`${secrets.dbUrl}/${secrets.dbName}`);

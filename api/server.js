@@ -13,12 +13,14 @@ const router = require('./router');
 const responses = require('./responses');
 
 const app = express();
-const port = 3000;
+const port = process.env.NODE_ENV === 'production' ? 80 : 3000;
 
 app.use(cors());
 app.options('*', cors());
 
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(responses);
@@ -28,8 +30,8 @@ router(app);
 
 // error handling
 app.use((err, req, res, next) => { // eslint-disable-line
-  if (err) res.badRequest(err);
+  if (err) res.serverError(err);
 });
 
 app.listen(port);
-console.log('Your server is running on', port);
+console.log('Your server is running on', port); // eslint-disable-line

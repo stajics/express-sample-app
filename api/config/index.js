@@ -1,1 +1,2 @@
 require('./connection');
+require('./log');
