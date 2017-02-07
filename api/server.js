@@ -21,9 +21,9 @@ app.options('*', cors());
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+app.use(responses);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(responses);
 app.use(passport.initialize());
 
 router(app);

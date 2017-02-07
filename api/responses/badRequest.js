@@ -1,8 +1,20 @@
-module.exports = (req, res) => (data) => {
+const _ = require('lodash');
+const winston = require('winston');
+const util = require('util');
+
+module.exports = (req, res) => (errors) => {
   res.status(400);
-  console.log(data);
-  res.send({
-    status: 'fail',
-    data,
+  winston.error({
+    date: new Date(),
+    method: req.method,
+    path: req.path,
+    query: req.query,
+    body: req.body,
+    authorization: req.headers.authorization,
+    errors: util.inspect(errors),
   });
+  if (_.isObject(errors)) {
+    errors = [errors];
+  }
+  res.send({ errors });
 };
