@@ -64,6 +64,6 @@
   "scripts": {
     "start": "nodemon api/server.js",
     "debug": "nodemon --inspect api/server.js",
-    "test": "jest --coverage --verbose --forceExit"
+    "test": "NODE_ENV=test jest --coverage --verbose --forceExit"
   }
 }
