@@ -1,6 +1,7 @@
 # Sample express api
 
 ##### Features:
+* mongoDb
 * docker (https://www.docker.com/)
 * eslint-config-airbnb linting. (https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)
 * passport.js authorization (JWT)  (http://passportjs.org/)
