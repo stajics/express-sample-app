@@ -27,11 +27,14 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 
 router(app);
-
 // error handling
 app.use((err, req, res, next) => { // eslint-disable-line
   if (err) res.serverError(err);
 });
 
-app.listen(port);
-console.log('Your server is running on', port); // eslint-disable-line
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port);
+  console.log('Your server is running on', port); // eslint-disable-line
+}
+
+module.exports = app;

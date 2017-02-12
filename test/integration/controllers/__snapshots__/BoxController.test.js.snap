@@ -1,0 +1,108 @@
+exports[`:create Should create box 1`] = `
+Object {
+  "__v": 0,
+  "name": "box",
+}
+`;
+
+exports[`:create Should get error (no box name) 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "errors": Object {
+        "name": Object {
+          "kind": "required",
+          "message": "Box name required",
+          "name": "ValidatorError",
+          "path": "name",
+          "properties": Object {
+            "message": "Box name required",
+            "path": "name",
+            "type": "required",
+          },
+        },
+      },
+      "message": "Box validation failed",
+      "name": "ValidationError",
+    },
+  ],
+}
+`;
+
+exports[`:delete Should delete box 1`] = `
+Object {
+  "n": 1,
+  "ok": 1,
+}
+`;
+
+exports[`:delete Should error on delete box. (bad box id) 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "kind": "ObjectId",
+      "message": "Cast to ObjectId failed for value \"14214\" at path \"_id\" for model \"Box\"",
+      "name": "CastError",
+      "path": "_id",
+      "stringValue": "\"14214\"",
+      "value": "14214",
+    },
+  ],
+}
+`;
+
+exports[`:read Should get boxes 1`] = `
+Array [
+  Object {
+    "__v": 0,
+    "_id": "589d95ea18d583282623b042",
+    "name": "box1",
+  },
+]
+`;
+
+exports[`:readOne Should get box 1`] = `
+Object {
+  "__v": 0,
+  "_id": "589d95ea18d583282623b042",
+  "name": "box1",
+}
+`;
+
+exports[`:readOne Should get no box 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "kind": "ObjectId",
+      "message": "Cast to ObjectId failed for value \"589d95ea18\" at path \"_id\" for model \"Box\"",
+      "name": "CastError",
+      "path": "_id",
+      "stringValue": "\"589d95ea18\"",
+      "value": "589d95ea18",
+    },
+  ],
+}
+`;
+
+exports[`:update Should error on update box. (bad box id) 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "kind": "ObjectId",
+      "message": "Cast to ObjectId failed for value \"14214\" at path \"_id\" for model \"Box\"",
+      "name": "CastError",
+      "path": "_id",
+      "stringValue": "\"14214\"",
+      "value": "14214",
+    },
+  ],
+}
+`;
+
+exports[`:update Should update box 1`] = `
+Object {
+  "n": 1,
+  "nModified": 1,
+  "ok": 1,
+}
+`;

@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^1.0.2",
+    "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
     "cors": "^2.8.1",
     "express": "^4.14.1",
@@ -24,7 +25,9 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
-    "nodemon": "^1.11.0"
+    "jest-cli": "^18.1.0",
+    "nodemon": "^1.11.0",
+    "supertest": "^3.0.0"
   },
   "eslintConfig": {
     "extends": [
@@ -37,10 +40,29 @@
       "no-console": "off",
       "no-underscore-dangle": "off",
       "no-new": "off"
+    },
+    "globals": {
+      "test": "true",
+      "fail": "true",
+      "expect": "true",
+      "beforeAll": "true",
+      "beforeEach": "true",
+      "describe": "true",
+      "jest": "true"
     }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "api/config/passport/*.js",
+      "api/controllers/*.js",
+      "api/middleware/*.js",
+      "api/models/*.js"
+    ]
   },
   "scripts": {
     "start": "nodemon api/server.js",
-    "debug": "nodemon --inspect api/server.js"
+    "debug": "nodemon --inspect api/server.js",
+    "test": "jest --coverage --verbose --forceExit"
   }
 }

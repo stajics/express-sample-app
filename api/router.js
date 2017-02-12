@@ -14,7 +14,7 @@ module.exports = (app) => {
 
   apiRoutes.post('/boxes', boxController.create);
   apiRoutes.get('/boxes', boxController.read);
-  apiRoutes.post('/boxes/:id', boxController.readOne);
+  apiRoutes.get('/boxes/:id', boxController.readOne);
   apiRoutes.put('/boxes/:id', boxController.update);
   apiRoutes.delete('/boxes/:id', boxController.destroy);
 

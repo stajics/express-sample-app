@@ -1,0 +1,81 @@
+exports[`:login Should fail login (bad email) 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "code": 1,
+      "message": "Bad credentials",
+    },
+  ],
+}
+`;
+
+exports[`:login Should fail login (bad password) 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "code": 1,
+      "message": "Bad credentials",
+    },
+  ],
+}
+`;
+
+exports[`:login Should fail login (no email) 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "code": 2,
+      "message": "Missing credentials",
+    },
+  ],
+}
+`;
+
+exports[`:login Should login 1`] = `
+Object {
+  "token": "token",
+  "user": Object {
+    "__v": 0,
+    "_id": "589b5b4aa79dff2f7fe6659d",
+    "email": "test@test.com",
+    "firstName": "name",
+    "lastName": "lastname",
+  },
+}
+`;
+
+exports[`:signup Should fail signup (no password) 1`] = `
+Object {
+  "errors": Array [
+    Object {
+      "errors": Object {
+        "password": Object {
+          "kind": "required",
+          "message": "User password required",
+          "name": "ValidatorError",
+          "path": "password",
+          "properties": Object {
+            "message": "User password required",
+            "path": "password",
+            "type": "required",
+          },
+        },
+      },
+      "message": "User validation failed",
+      "name": "ValidationError",
+    },
+  ],
+}
+`;
+
+exports[`:signup Should signup 1`] = `
+Object {
+  "token": "token",
+  "user": Object {
+    "__v": 0,
+    "email": "test1@test.com",
+    "firstName": "name",
+    "lastName": "name",
+  },
+}
+`;

@@ -1,7 +1,7 @@
 const Box = require('mongoose').model('Box');
 const _ = require('lodash');
 
-const create = (req, res, next) => {
+const create = (req, res) => {
   const newBox = new Box(req.body);
   newBox.save().then((box) => {
     res.ok(box);
@@ -16,11 +16,11 @@ const read = (req, res, next) => {
   .catch(err => next(err));
 };
 
-const readOne = (req, res, next) => {
+const readOne = (req, res) => {
   Box.findById(req.params.id).then((box) => {
     res.ok(box);
   })
-  .catch(err => next(err));
+  .catch(err => res.notFound(err));
 };
 
 const update = (req, res, next) => {
@@ -31,11 +31,11 @@ const update = (req, res, next) => {
   .catch(err => next(err));
 };
 
-const destroy = (req, res, next) => {
+const destroy = (req, res) => {
   Box.remove({ _id: req.params.id }).then((box) => {
     res.ok(box);
   })
-  .catch(err => next(err));
+  .catch(err => res.badRequest(err));
 };
 
 module.exports = {

@@ -30,6 +30,7 @@ module.exports = new PassportLocalStrategy({
 
       const token = jwt.sign(payload, secrets.jwtSecret, { expiresIn: '5000d' });
 
+      user = user.toObject();
       delete user.password;
       return next(null, token, user);
     })
