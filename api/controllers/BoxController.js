@@ -18,6 +18,7 @@ const read = (req, res, next) => {
 
 const readOne = (req, res) => {
   Box.findById(req.params.id).then((box) => {
+    if (_.isEmpty(box)) return res.notFound();
     res.ok(box);
   })
   .catch(err => res.notFound(err));

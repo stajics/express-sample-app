@@ -1,0 +1,351 @@
+swagger: "2.0"
+
+################################################################################
+#                              API Information                                 #
+################################################################################
+info:
+  version: "1.0"
+  title: Basic Express API
+  description: API
+# during dev, should point to your local machine
+host: "localhost:3000"
+# basePath prefixes all resource paths
+basePath: /
+#
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+
+################################################################################
+#                                  Security                                    #
+################################################################################
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: "Users login JWT with Bearer prefix. Example: Bearer <JWT>"
+
+################################################################################
+#                                           Paths                              #
+################################################################################
+
+paths:
+  /auth/signup:
+    post:
+      tags:
+        - Auth
+      summary: Register new user.
+      operationId: signUp
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: User object that needs to be added to the users.
+          required: true
+          schema:
+            $ref: "#/definitions/PostUsersSignUpBody"
+      responses:
+        "201":
+          description: User signed up.
+          schema:
+            $ref: "#/definitions/PostUserSignUpResponse"
+
+
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Log in.
+      description: "Log in."
+      operationId: login
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: User credentials for login.
+          required: true
+          schema:
+            $ref: "#/definitions/PostUsersLoginBody"
+      responses:
+        "201":
+          description: User logged in.
+          schema:
+            $ref: "#/definitions/PostUserLoginResponse"
+
+  /api/boxes:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Box
+      summary: Get all boxes.
+      operationId: getBoxes
+      description: "Requires logged in user."
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: All users.
+          schema:
+            $ref: "#/definitions/GetBoxesResponse"
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Box
+      summary: Create box.
+      operationId: createBox
+      description: "Requires logged in user."
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Attributes and values that will be created.
+          required: true
+          schema:
+            $ref: "#/definitions/PostBoxesBody"
+      responses:
+        "200":
+          description: All users.
+          schema:
+            $ref: "#/definitions/PostBoxesResponse"
+
+  /api/boxes/{id}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Box
+      summary: Get box.
+      operationId: getBox
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: ID of the box
+          required: true
+          type: string
+      responses:
+        "200":
+          description: All users.
+          schema:
+            $ref: "#/definitions/GetBoxesIdResponse"
+    put:
+      security:
+        - Bearer: []
+      tags:
+        - Box
+      summary: Update box.
+      description: "Requires logged in user."
+      operationId: updateBox
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: ID of the box that needs to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Attributes and values that will be updated.
+          required: true
+          schema:
+            $ref: "#/definitions/PutBoxesBody"
+      responses:
+        "200":
+          description: User updated.
+          schema:
+            $ref: "#/definitions/PutBoxesResponse"
+
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Box
+      summary: Delete box.
+      description: "Requires logged in user."
+      operationId: deleteBox
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          description: ID of the user that needs to be deleted.
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Box deleted.
+          schema:
+            $ref: "#/definitions/DeleteBoxesResponse"
+
+################################################################################
+#                                 Definitions                                  #
+################################################################################
+
+definitions:
+  #################################################
+  #models
+  User:
+    type: object
+    required:
+      - _id
+      - email
+      - firstName
+      - lastName
+    properties:
+      _id:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+
+  Box:
+    type: object
+    required:
+      - _id
+      - name
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+  #################################################################
+  #params
+  PostUsersSignUpBody:
+    type: object
+    required:
+      - email
+      - firstName
+      - password
+      - lastName
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      password:
+        type: string
+      lastName:
+        type: string
+
+  PostUsersLoginBody:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+
+  PostBoxesBody:
+    type: object
+    required:
+      - name
+    properties:
+      name:
+        type: string
+
+  PutBoxesBody:
+    type: object
+    properties:
+      name:
+        type: string
+  ###############################################################
+  #responses
+  PostUserSignUpResponse:
+    type: object
+    required:
+      - token
+      - user
+    properties:
+      token:
+        type: string
+        description: "JWT"
+      user:
+        $ref: "#/definitions/User"
+
+  PostUserLoginResponse:
+    type: object
+    required:
+      - token
+      - user
+    properties:
+      token:
+        type: string
+        description: "JWT"
+      user:
+        $ref: "#/definitions/User"
+
+  GetBoxesResponse:
+    type: array
+    items:
+      type: object
+      $ref: "#/definitions/Box"
+
+  GetBoxesIdResponse:
+    type: array
+    items:
+      type: object
+      $ref: "#/definitions/Box"
+
+  PostBoxesResponse:
+    type: array
+    items:
+      type: object
+      $ref: "#/definitions/Box"
+
+  PutBoxesResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        n:
+          type: string
+        nModified:
+          type: string
+        ok:
+          type: string
+
+  DeleteBoxesResponse:
+    type: array
+    items:
+      type: object
+      properties:
+        n:
+          type: string
+        ok:
+          type: string

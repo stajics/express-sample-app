@@ -48,7 +48,8 @@
       "beforeAll": "true",
       "beforeEach": "true",
       "describe": "true",
-      "jest": "true"
+      "jest": "true",
+      "__dirname": "true"
     }
   },
   "jest": {

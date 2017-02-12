@@ -20,4 +20,8 @@ module.exports = (app) => {
 
   app.use('/auth', authRoutes);
   app.use('/api', isAuthenticated, apiRoutes);
+
+  // documentation
+  app.use('/documentation', express.static('./documentation/swagger'));
+  app.use('/docs', express.static('./documentation/documentation.yaml'));
 };
